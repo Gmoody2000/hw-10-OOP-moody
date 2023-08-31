@@ -1,7 +1,6 @@
-// const fs = require('fs').promises;
-const getUserInput = require('./lib/userInput');
-const { Triangle, Circle, Square } = require('./lib/shapes');
-const generateSVG = require('./lib/svgGenerator');
+const getUserInput = require('./userInput');
+const { Triangle, Circle, Square } = require('./shapes');
+const generateSVG = require('./svgGenerator');
 
 async function main() {
   const userInput = await getUserInput();
@@ -16,9 +15,7 @@ async function main() {
   }
 
   shape.setColor(userInput.shapeColor);
-  shape.setText(userInput.text);
-  shape.setTextColor(userInput.textColor);
-
+  shape.setText(userInput.text, userInput.textColor);  
   const svgContent = generateSVG(
     shape,
     userInput.shapeColor,
@@ -27,7 +24,6 @@ async function main() {
   );
 
   try {
-    // await fs.writeFile('logo.svg', svgContent);
     console.log('Generated logo.svg');
   } catch (error) {
     console.error('Error writing logo.svg:', error);
